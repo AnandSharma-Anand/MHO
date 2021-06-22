@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.tabs.TabLayout android:id="@+id/tablayout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" app:tabIndicator="@drawable/underline" app:tabIndicatorFullWidth="false" app:tabPadding="0.0dip" app:tabPaddingEnd="0.0dip" app:tabPaddingStart="0.0dip" />
+    <LinearLayout android:id="@+id/room_profile" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include layout="@layout/fragment_room_profile" />
+    </LinearLayout>
+    <LinearLayout android:id="@+id/room_member" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include layout="@layout/fragment_room_member" />
+    </LinearLayout>
+</LinearLayout>

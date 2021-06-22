@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.Toolbar android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" android:id="@id/appbar" android:background="@color/teal_900" android:layout_width="fill_parent" android:layout_height="wrap_content" app:navigationIcon="@drawable/white_back_icon" app:popupTheme="@style/Theme.AppCompat.Light" app:title="Add new friends" app:titleTextColor="@color/white" xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android" />
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="20.0dip" android:layout_marginBottom="10.0dip">
+        <EditText android:id="@id/username"
+            android:background="@null"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search by username or ID"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:drawablePadding="10.0dip"
+            android:drawableTint="@color/grey"
+            android:layout_weight="1.0" />
+        <ImageView android:id="@id/clear_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_baseline_close_24" />
+    </LinearLayout>
+    <View android:background="@color/light_grey" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:layout_marginBottom="19.0dip" />
+    <ListView android:id="@id/listview" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>

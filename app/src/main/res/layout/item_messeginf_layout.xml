@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="left" android:orientation="horizontal" android:id="@id/they_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_marginRight="70.0dip" android:layout_weight="1.0">
+        <de.hdodenhof.circleimageview.CircleImageView android:layout_width="30.0dip" android:layout_height="30.0dip" android:src="@drawable/profile" />
+        <TextView android:textSize="12.0dip" android:textStyle="bold" android:textColor="@color/white" android:id="@id/they_msg" android:background="@drawable/chat_box" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="Hey, Welcome to our home, where love resides, memories are created" />
+    </LinearLayout>
+    <LinearLayout android:gravity="end" android:orientation="horizontal" android:id="@id/me_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="70.0dip" android:layout_marginTop="15.0dip" android:layout_weight="1.0">
+        <TextView android:textSize="12.0dip" android:textStyle="bold" android:textColor="@color/black" android:id="@id/me_messege" android:background="@drawable/right_chat_box" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:text="Hey, Welcome to our home, where love resides, memories are created" />
+        <de.hdodenhof.circleimageview.CircleImageView android:layout_width="30.0dip" android:layout_height="30.0dip" android:src="@drawable/profile" />
+    </LinearLayout>
+</LinearLayout>

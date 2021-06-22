@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.Toolbar android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" android:id="@+id/appbar" android:layout_width="fill_parent" android:layout_height="wrap_content" app:popupTheme="@style/Theme.AppCompat.Light" app:title="  OTP Verification" app:titleMarginStart="10.0dip" app:titleTextColor="@color/black" xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android" />
+    <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="30.0dip" android:layout_marginRight="20.0dip" android:text="Enter the SMS verification code sent to" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:layout_marginBottom="30.0dip">
+        <TextView android:id="@+id/mobile" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="+90 xxxxxxxxxx" />
+        <TextView android:textColor="@color/skyblue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:text="Wrong Number?" />
+    </LinearLayout>
+    <in.aabhasjindal.otptextview.OtpTextView android:layout_gravity="center" android:id="@+id/otptextview" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="30.0dip" app:height="40.0dip" app:length="4" app:otp_box_background="@drawable/otp_box" app:width="40.0dip" />
+    <TextView android:textColor="@color/skyblue" android:layout_gravity="center" android:id="@+id/resendotp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Resend" />
+    <TextView android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="20.0dip" android:layout_marginBottom="10.0dip" android:text="Did't receive the code?" />
+</LinearLayout>

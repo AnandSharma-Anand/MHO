@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.Toolbar android:id="@id/toolbar" android:background="@color/teal_700" android:layout_width="fill_parent" android:layout_height="wrap_content" app:navigationIcon="@drawable/white_back_icon" app:title="Privacy" app:titleTextColor="@color/white" />
+    <WebView android:id="@id/webview" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>

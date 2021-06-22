@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:background="@drawable/bottom_curve" android:layout_width="fill_parent" android:layout_height="55.0dip" android:src="@drawable/travel" android:scaleType="fitXY" />
+            <View android:background="@color/teal_ops" android:layout_width="fill_parent" android:layout_height="55.0dip" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="50.0dip" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip">
+                <de.hdodenhof.circleimageview.CircleImageView android:id="@+id/opendrawer" android:layout_width="40.0dip" android:layout_height="40.0dip" android:src="@drawable/profile" />
+                <TextView android:textSize="22.0dip" android:textStyle="bold" android:textColor="@color/white" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="mho" android:layout_weight="1.0" />
+                <ImageView android:id="@+id/searchroom" android:layout_width="wrap_content" android:layout_height="25.0dip" android:src="@drawable/ic_baseline_search_24" app:tint="@color/white" />
+                <ImageView android:id="@+id/addfriend" android:layout_width="wrap_content" android:layout_height="25.0dip" android:src="@drawable/add_friend" app:tint="@color/white" />
+            </LinearLayout>
+        </RelativeLayout>
+        <androidx.cardview.widget.CardView android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="50.0dip">
+            <RelativeLayout android:id="@+id/relativelayout" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+    <LinearLayout android:orientation="horizontal" android:background="@drawable/gradient_back" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/room" android:padding="10.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <ImageView android:layout_width="20.0dip" android:layout_height="20.0dip" android:src="@drawable/home" />
+            <TextView android:textSize="12.0dip" android:textColor="@color/white" android:id="@+id/tv_room" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Room" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/chat" android:padding="10.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <ImageView android:layout_width="20.0dip" android:layout_height="20.0dip" android:src="@drawable/chat" />
+            <TextView android:textSize="12.0dip" android:textColor="@color/white" android:id="@+id/tv_message" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Message" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@+id/account" android:padding="10.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <ImageView android:layout_width="20.0dip" android:layout_height="20.0dip" android:src="@drawable/account" />
+            <TextView android:textSize="12.0dip" android:textColor="@color/white" android:id="@+id/tv_account" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Account" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

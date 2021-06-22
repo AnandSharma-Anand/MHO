@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.Toolbar android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" android:id="@+id/appbar" android:layout_width="fill_parent" android:layout_height="wrap_content" app:popupTheme="@style/Theme.AppCompat.Light" app:title="Verify Your Phone Number" app:titleTextColor="@color/black" xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android" />
+    <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="30.0dip" android:layout_marginRight="20.0dip" android:layout_marginBottom="30.0dip" android:text="Enter the phone number you want to sign up or log in with. We won't share your number with anyone" />
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="20.0dip" android:layout_marginBottom="10.0dip">
+        <TextView android:gravity="center" android:id="@+id/spin_state" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:text="+91" android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24" android:drawablePadding="10.0dip" />
+        <View android:background="@color/light_grey" android:layout_width="1.0dip" android:layout_height="fill_parent" android:layout_marginLeft="10.0dip" android:layout_marginTop="5.0dip" android:layout_marginRight="10.0dip" android:layout_marginBottom="5.0dip" />
+        <EditText android:id="@+id/mobileno" android:background="@null" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Phone Number" android:maxLength="10" android:layout_weight="1.0" android:inputType="number" />
+        <ImageView android:id="@+id/clear_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_baseline_close_24" />
+    </LinearLayout>
+    <View android:background="@color/light_grey" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:layout_marginBottom="19.0dip" />
+    <com.skydoves.elasticviews.ElasticButton android:theme="@style/CustomBtnRipple" android:id="@+id/btn_login" android:background="@drawable/corner_redius" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="20.0dip" android:text="Sign Up/Log In" />
+</LinearLayout>

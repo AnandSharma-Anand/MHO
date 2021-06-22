@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar" android:background="@color/teal_700" android:layout_width="fill_parent" android:layout_height="50.0dip" app:navigationIcon="@drawable/white_back_icon" app:title="Update Profile" app:titleTextColor="@color/white" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <RelativeLayout android:layout_gravity="center_horizontal" android:layout_width="155.0dip" android:layout_height="155.0dip" android:layout_marginTop="30.0dip">
+                <androidx.cardview.widget.CardView android:layout_width="150.0dip" android:layout_height="150.0dip" app:cardBackgroundColor="@color/light_teal" app:cardCornerRadius="20.0dip" app:cardElevation="0.0dip">
+                    <ImageView android:id="@+id/profile_img" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_margin="10.0dip" android:src="@drawable/profile" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView android:id="@+id/opencamera" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" app:cardBackgroundColor="@color/teal_200" app:cardCornerRadius="15.0dip">
+                    <ImageView android:layout_width="20.0dip" android:layout_height="20.0dip" android:layout_margin="5.0dip" android:src="@drawable/ic_baseline_camera_alt_24" app:tint="@color/white" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+            <TextView android:textSize="12.0dip" android:layout_gravity="start" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:layout_marginTop="30.0dip" android:layout_marginRight="22.0dip" android:text="User Name" />
+            <EditText android:id="@+id/username" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:hint="User name" />
+            <TextView android:textSize="12.0dip" android:layout_gravity="start" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:layout_marginTop="20.0dip" android:layout_marginRight="22.0dip" android:text="Gender" />
+<!--            <EditText android:id="@+id/gender" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:hint="Gender" />-->
+
+            <TextView android:textSize="18.0dip" android:gravity="bottom" android:id="@+id/gender" android:layout_width="fill_parent" android:layout_height="40.0dip" android:layout_marginLeft="23.0dip" android:layout_marginRight="23.0dip" android:text="" android:hint="Gender" />
+            <View android:background="@color/grey" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" />
+
+
+            <TextView android:textSize="12.0dip" android:layout_gravity="start" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:layout_marginTop="20.0dip" android:layout_marginRight="22.0dip" android:text="Date of birth" />
+<!--            <EditText android:id="@+id/dob" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:hint="Date of Birth" />-->
+
+            <TextView android:textSize="18.0dip" android:gravity="bottom" android:id="@+id/dob" android:layout_width="fill_parent" android:layout_height="40.0dip" android:layout_marginLeft="23.0dip" android:layout_marginRight="23.0dip" android:text="" android:hint="Date of Birth" />
+            <View android:background="@color/grey" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" />
+
+
+            <TextView android:textSize="12.0dip" android:layout_gravity="start" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:layout_marginTop="20.0dip" android:layout_marginRight="22.0dip" android:text="Country" />
+            <TextView android:textSize="18.0dip" android:gravity="bottom" android:id="@+id/country" android:layout_width="fill_parent" android:layout_height="40.0dip" android:layout_marginLeft="23.0dip" android:layout_marginRight="23.0dip" android:text="India" android:hint="Country" />
+            <View android:background="@color/grey" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" />
+            <TextView android:textSize="12.0dip" android:layout_gravity="start" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:layout_marginTop="20.0dip" android:layout_marginRight="22.0dip" android:text="Tag" />
+            <EditText android:id="@+id/tag" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:hint="Tag" />
+            <TextView android:textSize="12.0dip" android:layout_gravity="start" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip" android:layout_marginTop="20.0dip" android:layout_marginRight="22.0dip" android:text="Bio" />
+            <EditText android:id="@+id/bio" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:hint="Add a short bio to tell people more about yourself." />
+            <com.skydoves.elasticviews.ElasticButton android:textSize="16.0dip" android:textStyle="bold" android:textColor="@color/white" android:id="@+id/update" android:background="@drawable/cornor_color_radius" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="20.0dip" android:layout_marginRight="20.0dip" android:layout_marginBottom="20.0dip" android:text="Update" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

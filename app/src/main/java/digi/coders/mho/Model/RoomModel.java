@@ -10,6 +10,24 @@ public class RoomModel {
     String status;
     String totaljoin_memebr;
 
+    public String getRoom_tag() {
+        return room_tag;
+    }
+
+    public RoomModel(String id, String room_name, String created_id, String photo, String announcement, String status, String date, String totaljoin_memebr, String room_tag) {
+        this.announcement = announcement;
+        this.created_id = created_id;
+        this.date = date;
+        this.id = id;
+        this.photo = photo;
+        this.room_name = room_name;
+        this.status = status;
+        this.totaljoin_memebr = totaljoin_memebr;
+        this.room_tag = room_tag;
+    }
+
+    String room_tag;
+
     public String getId() {
         return this.id;
     }
@@ -38,16 +56,7 @@ public class RoomModel {
         return this.date;
     }
 
-    public RoomModel(String id2, String room_name2, String created_id2, String photo2, String announcement2, String status2, String date2, String totaljoin_memebr2) {
-        this.id = id2;
-        this.room_name = room_name2;
-        this.created_id = created_id2;
-        this.photo = photo2;
-        this.announcement = announcement2;
-        this.status = status2;
-        this.date = date2;
-        this.totaljoin_memebr = totaljoin_memebr2;
-    }
+
 
     public String getTotaljoin_memebr() {
         return this.totaljoin_memebr;

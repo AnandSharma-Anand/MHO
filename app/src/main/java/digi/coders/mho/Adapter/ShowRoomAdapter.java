@@ -27,7 +27,8 @@ public class ShowRoomAdapter extends RecyclerView.Adapter<ShowRoomAdapter.ViewHo
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(((LayoutInflater) this.context.getSystemService(context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_room_list, parent, false));
+        return new ViewHolder(((LayoutInflater) this.context.getSystemService(context.LAYOUT_INFLATER_SERVICE))
+                .inflate(R.layout.item_room_list, parent, false));
     }
 
     public void onBindViewHolder(ViewHolder holder, final int position) {
@@ -35,6 +36,12 @@ public class ShowRoomAdapter extends RecyclerView.Adapter<ShowRoomAdapter.ViewHo
             holder.announcment.setText(this.roomModelList.get(position).getAnnouncement());
             holder.room_name.setText(this.roomModelList.get(position).getRoom_name());
             holder.joined.setText(this.roomModelList.get(position).getTotaljoin_memebr());
+            holder.tags.setText(this.roomModelList.get(position).getRoom_tag());
+            if (this.roomModelList.get(position).getRoom_tag().trim().isEmpty()){
+                holder.tags.setVisibility(View.GONE);
+            }else {
+                holder.tags.setVisibility(View.VISIBLE);
+            }
             holder.room_card.setOnClickListener(new View.OnClickListener() {
                 /* class digi.coders.mho.Adapter.ShowRoomAdapter.AnonymousClass1 */
 
@@ -57,7 +64,7 @@ public class ShowRoomAdapter extends RecyclerView.Adapter<ShowRoomAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView announcment;
-        TextView joined;
+        TextView joined,tags;
         CardView room_card;
         ImageView room_img;
         TextView room_name;
@@ -69,6 +76,7 @@ public class ShowRoomAdapter extends RecyclerView.Adapter<ShowRoomAdapter.ViewHo
             this.announcment = (TextView) itemView.findViewById(R.id.announcment);
             this.joined = (TextView) itemView.findViewById(R.id.joined);
             this.room_card = (CardView) itemView.findViewById(R.id.room_card);
+            this.tags = (TextView) itemView.findViewById(R.id.tags);
         }
     }
 }

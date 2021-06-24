@@ -8,8 +8,24 @@
                 <TextView android:textSize="16.0dip" android:textStyle="bold" android:textColor="@color/white" android:id="@+id/head_roomname" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text=""/>
                 <TextView android:textSize="12.0dip" android:textStyle="bold" android:textColor="@color/white" android:id="@+id/online" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" />
             </LinearLayout>
-            <ImageView android:id="@+id/share_room" android:background="@drawable/circle" android:padding="8.0dip" android:layout_width="30.0dip" android:layout_height="30.0dip" android:src="@drawable/share"  />
-            <ImageView android:id="@+id/setting_headr" android:background="@drawable/circle" android:padding="8.0dip" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:src="@drawable/nut" />
+            <ImageView
+                android:id="@+id/share_room"
+                android:background="@drawable/circle"
+                android:padding="8.0dip"
+                android:layout_width="30.0dip"
+                android:layout_marginEnd="10.0dip"
+                android:layout_height="30.0dip"
+                android:src="@drawable/share"  />
+
+            <ImageView
+                android:id="@+id/setting_headr"
+                android:background="@drawable/circle"
+                android:padding="8.0dip"
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:layout_marginEnd="10.0dip"
+                android:src="@drawable/nut" />
+
             <ImageView android:id="@+id/head_roomprofile" android:background="@drawable/left_radius" android:padding="8.0dip" android:layout_width="30.0dip" android:layout_height="30.0dip" android:src="@drawable/menu" app:tint="@color/white" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>

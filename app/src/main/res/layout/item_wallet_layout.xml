@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+<LinearLayout android:orientation="horizontal" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <TextView android:textSize="18.0dip" android:textColor="@color/black" android:gravity="center_vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="10" android:drawableLeft="@drawable/doller_size" android:drawablePadding="10.0dip" />
+    </LinearLayout>
+    <TextView android:textStyle="bold" android:textColor="@color/white" android:backgroundTint="@color/teal_900" android:background="@drawable/radius_boror" android:paddingLeft="15.0dip" android:paddingTop="8.0dip" android:paddingRight="15.0dip" android:paddingBottom="8.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="INR 85.00" />
+</LinearLayout>

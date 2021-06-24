@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:orientation="vertical" android:padding="15.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent"
   xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView android:textSize="16.0dip" android:textColor="@color/black" android:id="@id/number_member" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Member: 50/100" android:singleLine="true" android:drawablePadding="10.0dip" />
-    <EditText android:background="@drawable/cornor_color_radius" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:layout_marginBottom="15.0dip" android:hint="Search Member" android:drawableLeft="@drawable/ic_baseline_search_24" android:drawablePadding="10.0dip" />
+    <TextView android:textSize="16.0dip" android:textColor="@color/black" android:id="@+id/number_member" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Member: 50/100" android:singleLine="true" android:drawablePadding="10.0dip" />
+    <EditText android:id="@+id/search_user" android:background="@drawable/cornor_color_radius" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:layout_marginBottom="15.0dip" android:hint="Search Member" android:drawableLeft="@drawable/ic_baseline_search_24" android:drawablePadding="10.0dip" />
     <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
         <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
-            <androidx.recyclerview.widget.RecyclerView android:id="@id/recyclerview_member" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerview_member" android:layout_width="fill_parent" android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

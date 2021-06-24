@@ -183,7 +183,7 @@ public class RoomFragment extends Fragment {
                             int i = 0;
                             while (i < jsonArray1.length()) {
                                 JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
-                                roomModelList.add(new RoomModel(jsonObject1.getString("id"), jsonObject1.getString("room_name"), jsonObject1.getString("created_id"), jsonObject1.getString("photo"), jsonObject1.getString("announcement"), jsonObject1.getString(NotificationCompat.CATEGORY_STATUS), jsonObject1.getString("date"), jsonObject1.getString("totaljoin_memebr")));
+                                roomModelList.add(new RoomModel(jsonObject1.getString("id"), jsonObject1.getString("room_name"), jsonObject1.getString("created_id"), jsonObject1.getString("photo"), jsonObject1.getString("announcement"), jsonObject1.getString(NotificationCompat.CATEGORY_STATUS), jsonObject1.getString("date"), jsonObject1.getString("totaljoin_memebr"), jsonObject1.getString("tag")));
                                 i++;
                                 jsonArray = jsonArray;
                             }

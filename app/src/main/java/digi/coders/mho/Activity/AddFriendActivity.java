@@ -1,6 +1,9 @@
 package digi.coders.mho.Activity;
 
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import com.google.gson.JsonArray;
 import com.skydoves.elasticviews.ElasticButton;
+
+import digi.coders.mho.Adapter.ActiveRoomMemberAdapter;
 import digi.coders.mho.Helper.Constant;
 import digi.coders.mho.Helper.PrefrenceManager;
 import digi.coders.mho.Model.UserDetailsModel;
@@ -37,9 +42,11 @@ public class AddFriendActivity extends AppCompatActivity {
     int position;
     ElasticButton sendrequest;
     TextView tag;
+    UserDetailsModel userDetailsModel2;
     UserDetailsModel userDetailsModel;
     TextView userid;
     TextView username;
+
 
     /* access modifiers changed from: protected */
     @Override // androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity
@@ -55,7 +62,17 @@ public class AddFriendActivity extends AppCompatActivity {
         this.userid = (TextView) findViewById(R.id.userid);
         this.sendrequest = (ElasticButton) findViewById(R.id.sendrequest);
         this.position = Integer.parseInt(getIntent().getStringExtra("pos"));
-        UserDetailsModel userDetailsModel2 = SearchUserActivity.userDetailsModels.get(this.position);
+
+        if (SearchUserActivity.userDetailsModels.size()!=0) {
+             userDetailsModel2 = SearchUserActivity.userDetailsModels.get(this.position);
+            sendrequest.setVisibility(View.VISIBLE);
+
+        }else {
+             userDetailsModel2 = ActiveRoomMemberAdapter.showRoomJoinedUserList.get(position).getUserDetailsModel();
+            sendrequest.setVisibility(View.GONE);
+
+        }
+
         this.userDetailsModel = userDetailsModel2;
         this.username.setText(userDetailsModel2.getUser_name());
         this.dateofbirth.setText(this.userDetailsModel.getDateofbirth());
@@ -70,11 +87,19 @@ public class AddFriendActivity extends AppCompatActivity {
                 AddFriendActivity.this.showpopup();
             }
         });
+
+        this.userid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CopyText(userid.getText().toString().trim());
+            }
+        });
+
     }
 
     public void showpopup() {
         this.dialog = new Dialog(this);
-        View v = ((LayoutInflater) getSystemService("layout_inflater")).inflate(R.layout.authontication_info_layout, (ViewGroup) null, false);
+        View v = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.authontication_info_layout, (ViewGroup) null, false);
         this.dialog.setContentView(v);
         this.dialog.setCancelable(false);
         this.dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
@@ -82,7 +107,7 @@ public class AddFriendActivity extends AppCompatActivity {
         final EditText auth_msg = (EditText) v.findViewById(R.id.auth_msg);
         final ImageView clear_text = (ImageView) v.findViewById(R.id.clear_text);
         auth_msg.setText("I'm " + this.userDetailsModel.getUser_name());
-        clear_text.setVisibility(0);
+        clear_text.setVisibility(View.VISIBLE);
         clear_text.setOnClickListener(new View.OnClickListener() {
             /* class digi.coders.mho.Activity.AddFriendActivity.AnonymousClass2 */
 
@@ -108,7 +133,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
             public void afterTextChanged(Editable editable) {
                 if (editable.toString().trim().length() != 0) {
-                    clear_text.setVisibility(0);
+                    clear_text.setVisibility(View.VISIBLE);
                     clear_text.setOnClickListener(new View.OnClickListener() {
                         /* class digi.coders.mho.Activity.AddFriendActivity.AnonymousClass4.AnonymousClass1 */
 
@@ -118,7 +143,7 @@ public class AddFriendActivity extends AppCompatActivity {
                     });
                     return;
                 }
-                clear_text.setVisibility(8);
+                clear_text.setVisibility(View.GONE);
             }
         });
         ((ElasticButton) v.findViewById(R.id.confirm_button)).setOnClickListener(new View.OnClickListener() {
@@ -148,11 +173,11 @@ public class AddFriendActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONArray(response.body().toString()).getJSONObject(0);
                     if (jsonObject.getString("res").equalsIgnoreCase("error")) {
-                        Toast.makeText(AddFriendActivity.this, jsonObject.getString(NotificationCompat.CATEGORY_MESSAGE), 0).show();
+                        Toast.makeText(AddFriendActivity.this, jsonObject.getString(NotificationCompat.CATEGORY_MESSAGE), Toast.LENGTH_SHORT).show();
                         AddFriendActivity.this.dialog.dismiss();
                         return;
                     }
-                    Toast.makeText(AddFriendActivity.this, jsonObject.getString(NotificationCompat.CATEGORY_MESSAGE), 0).show();
+                    Toast.makeText(AddFriendActivity.this, jsonObject.getString(NotificationCompat.CATEGORY_MESSAGE), Toast.LENGTH_SHORT).show();
                     AddFriendActivity.this.dialog.dismiss();
                 } catch (JSONException e) {
                 }
@@ -164,5 +189,17 @@ public class AddFriendActivity extends AppCompatActivity {
                 Log.i(" FriendRequest_error", t.toString());
             }
         });
+    }
+
+    public void CopyText(String text) {
+        String text1 = text;
+        if (!text1.isEmpty()) {
+            ClipboardManager  clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clipData = ClipData.newPlainText("key", text);
+            clipboardManager.setPrimaryClip(clipData);
+            Toast.makeText(getApplicationContext(), "Copied", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "No text to be copied", Toast.LENGTH_SHORT).show();
+        }
     }
 }

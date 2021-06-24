@@ -5,6 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import digi.coders.mho.Helper.Constant;
 import digi.coders.mho.Model.ShowRoomJoinedUser;
 import digi.coders.mho.R;
 import java.util.List;
@@ -24,6 +29,15 @@ public class JoinedUserAdapter extends RecyclerView.Adapter<JoinedUserAdapter.Vi
     }
 
     public void onBindViewHolder(ViewHolder holder, int position) {
+
+        try
+        {
+            Picasso.get().load(Constant.PROFILE_Url+""+showRoomJoinedUserList.get(position).getUserDetailsModel().getPhoto()).placeholder(R.drawable.profile).into(holder.profile);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
@@ -32,8 +46,14 @@ public class JoinedUserAdapter extends RecyclerView.Adapter<JoinedUserAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
+        CircleImageView profile;
+
         public ViewHolder(View itemView) {
             super(itemView);
+
+            profile=itemView.findViewById(R.id.profile);
+
         }
     }
 }

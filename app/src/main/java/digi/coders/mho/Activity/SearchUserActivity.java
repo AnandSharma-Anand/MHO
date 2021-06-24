@@ -53,7 +53,7 @@ public class SearchUserActivity extends AppCompatActivity {
 
             public void afterTextChanged(Editable editable) {
                 if (editable.toString().trim().length() != 0) {
-                    SearchUserActivity.this.clear_text.setVisibility(0);
+                    SearchUserActivity.this.clear_text.setVisibility(View.VISIBLE);
                     SearchUserActivity.this.clear_text.setOnClickListener(new View.OnClickListener() {
                         /* class digi.coders.mho.Activity.SearchUserActivity.AnonymousClass1.AnonymousClass1 */
 
@@ -64,7 +64,7 @@ public class SearchUserActivity extends AppCompatActivity {
                     SearchUserActivity.this.serachuser(editable.toString().trim());
                     return;
                 }
-                SearchUserActivity.this.clear_text.setVisibility(8);
+                SearchUserActivity.this.clear_text.setVisibility(View.GONE);
                 SearchUserActivity.this.listview.setAdapter((ListAdapter) null);
             }
         });
@@ -94,6 +94,7 @@ public class SearchUserActivity extends AppCompatActivity {
 
                             @Override // android.widget.AdapterView.OnItemClickListener
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                                 Intent intent = new Intent(SearchUserActivity.this, AddFriendActivity.class);
                                 intent.putExtra("pos", i + "");
                                 SearchUserActivity.this.startActivity(intent);
@@ -101,7 +102,7 @@ public class SearchUserActivity extends AppCompatActivity {
                         });
                         return;
                     }
-                    Toast.makeText(SearchUserActivity.this, jsonObject.getString(NotificationCompat.CATEGORY_MESSAGE), 0).show();
+                    Toast.makeText(SearchUserActivity.this, jsonObject.getString(NotificationCompat.CATEGORY_MESSAGE), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

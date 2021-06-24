@@ -24,6 +24,7 @@ public class Constant {
     public static String PROFILE_Url = "http://mho.codersadda.in/uploads/User/";
     public static String RoomPROFILE_Url = "http://mho.codersadda.in/uploads/Room/";
     public static String Slider_Url = "http://mho.codersadda.in/uploads/Slider/";
+    public static String GIFTICON_URL = "http://mho.codersadda.in/uploads/Gift/";
     public static String countrycode = "+91";
     public static String countryname = "+91";
     public static Dialog dialog;

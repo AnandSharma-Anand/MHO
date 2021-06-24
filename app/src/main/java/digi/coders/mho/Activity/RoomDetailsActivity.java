@@ -2,9 +2,11 @@ package digi.coders.mho.Activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
@@ -12,15 +14,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.NotificationCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.github.ybq.android.spinkit.sprite.Sprite;
@@ -32,10 +39,14 @@ import com.google.gson.JsonArray;
 import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 import digi.coders.mho.Adapter.ActiveRoomMemberAdapter;
+import digi.coders.mho.Adapter.GiftShowAdapter;
 import digi.coders.mho.Adapter.JoinedUserAdapter;
+import digi.coders.mho.Adapter.SelectUserAdapter;
 import digi.coders.mho.Adapter.ShowRoomChatAdapter;
+import digi.coders.mho.Helper.AdapterOnclick;
 import digi.coders.mho.Helper.Constant;
 import digi.coders.mho.Helper.PrefrenceManager;
+import digi.coders.mho.Model.GiftModel;
 import digi.coders.mho.Model.RoomShowChatModel;
 import digi.coders.mho.Model.ShowRoomJoinedUser;
 import digi.coders.mho.Model.UserDetailsModel;
@@ -49,7 +60,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RoomDetailsActivity extends AppCompatActivity {
+public class RoomDetailsActivity extends AppCompatActivity implements AdapterOnclick {
     public static String announcement;
     public static String country;
     public static String created_id;
@@ -74,7 +85,8 @@ public class RoomDetailsActivity extends AppCompatActivity {
     LinearLayout roomdetails;
     List<ShowRoomJoinedUser> showRoomJoinedUserList;
     List<ShowRoomJoinedUser> showRoomJoinedUserListsearch;
-    int time = 0;
+    List<GiftModel> giftModelList;
+    int time = 0;String walletmount;
     ImageView share_room;
 
     /* access modifiers changed from: protected */
@@ -97,9 +109,7 @@ public class RoomDetailsActivity extends AppCompatActivity {
 
         /* class digi.coders.mho.Activity.RoomDetailsActivity.AnonymousClass1 */
         this.gift.setOnClickListener(view -> {
-            BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(RoomDetailsActivity.this);
-            mBottomSheetDialog.setContentView(RoomDetailsActivity.this.getLayoutInflater().inflate(R.layout.send_gift, (ViewGroup) null));
-            mBottomSheetDialog.show();
+            opengiftlayout();
         });
 
 
@@ -141,6 +151,8 @@ public class RoomDetailsActivity extends AppCompatActivity {
         joinroom();
         getRoomdetails(getIntent().getStringExtra("roomid"));
         JoinRoomShowUser("");
+        getwalletamount();
+        getgifts();
 
         setting_headr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +160,9 @@ public class RoomDetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(RoomDetailsActivity.this, EditRoomProfileActivity.class);
                 intent.putExtra("roomid", RoomDetailsActivity.this.getIntent().getStringExtra("roomid"));
                 RoomDetailsActivity.this.startActivity(intent);
+
+
+
             }
         });
 
@@ -176,6 +191,66 @@ public class RoomDetailsActivity extends AppCompatActivity {
         };
         this.countDownTimer = r7;
         r7.start();
+    }
+
+    private void opengiftlayout() {
+        BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(RoomDetailsActivity.this);
+        View view1=RoomDetailsActivity.this.getLayoutInflater().inflate(R.layout.send_gift, (ViewGroup) null);
+        mBottomSheetDialog.setContentView(view1);
+        mBottomSheetDialog.show();
+        GiftShowAdapter giftShowAdapter=new GiftShowAdapter(RoomDetailsActivity.this,giftModelList);
+
+        Spinner spinner=(Spinner) view1.findViewById(R.id.spin_user);
+        Spinner spin_count=(Spinner) view1.findViewById(R.id.spin_count);
+
+        ((RecyclerView) view1.findViewById(R.id.gitview)).setAdapter(giftShowAdapter);
+        ((TextView) view1.findViewById(R.id.walletammount)).setText(walletmount);
+        ((RecyclerView) view1.findViewById(R.id.gitview)).setLayoutManager(new GridLayoutManager(RoomDetailsActivity.this,4));
+        ((TextView) view1.findViewById(R.id.recharge)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RoomDetailsActivity.this,WalletActivity.class));
+            }
+        });
+        List<String> userlist=new ArrayList<>();
+        for (int i=1;i<showRoomJoinedUserList.size();i++){
+            userlist.add(""+i);
+        }
+
+        spinner.setAdapter(new SelectUserAdapter(showRoomJoinedUserList,RoomDetailsActivity.this));
+        spin_count.setAdapter(new ArrayAdapter(RoomDetailsActivity.this, android.R.layout.simple_dropdown_item_1line,userlist));
+
+        TextView send=view1.findViewById(R.id.send);
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Dialog dialog = new Dialog(RoomDetailsActivity.this,R.style.AppCompatAlertDialogStyle);
+                View aa = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE))
+                            .inflate(R.layout.item_showsendedgift_layout, (ViewGroup) null, false);
+
+                dialog.setContentView(aa);
+//                dialog.setCancelable(false);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                ((ViewGroup)dialog.getWindow().getDecorView())
+                        .getChildAt(0).startAnimation(AnimationUtils.loadAnimation(
+                        RoomDetailsActivity.this,android.R.anim.slide_in_left));
+
+                mBottomSheetDialog.cancel();
+                dialog.show();
+
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        dialog.dismiss();
+                    }
+                }, 3000);
+            }
+        });
+
+
+
+
     }
 
     /* access modifiers changed from: protected */
@@ -288,7 +363,7 @@ public class RoomDetailsActivity extends AppCompatActivity {
     }
 
     public void joinroom() {
-        Constant.showprogressbar(this, 1);
+     ////   Constant.showprogressbar(this, 1);
         Constant.StartConnection().JoinRoom(Constant.KEYVALUE, new PrefrenceManager(getApplicationContext()).getuserdetails().getId(), getIntent().getStringExtra("roomid")).enqueue(new Callback<JsonArray>() {
             /* class digi.coders.mho.Activity.RoomDetailsActivity.AnonymousClass7 */
 
@@ -317,7 +392,7 @@ public class RoomDetailsActivity extends AppCompatActivity {
     }
 
     public void ShowRoomChat() {
-        Constant.showprogressbar(this, 1);
+     ////   Constant.showprogressbar(this, 1);
         this.roomShowChatModelList = new ArrayList();
         Constant.StartConnection().ShowRoomChat(Constant.KEYVALUE, getIntent().getStringExtra("roomid")).enqueue(new Callback<JsonArray>() {
             /* class digi.coders.mho.Activity.RoomDetailsActivity.AnonymousClass8 */
@@ -356,7 +431,7 @@ public class RoomDetailsActivity extends AppCompatActivity {
     }
 
     public void sendmsg(String msg) {
-        Constant.showprogressbar(this, 1);
+     ////   Constant.showprogressbar(this, 1);
         Constant.StartConnection().RoomChat(Constant.KEYVALUE, new PrefrenceManager(this).getuserdetails().getId(), getIntent().getStringExtra("roomid"), msg).enqueue(new Callback<JsonArray>() {
             /* class digi.coders.mho.Activity.RoomDetailsActivity.AnonymousClass9 */
 
@@ -395,7 +470,14 @@ public class RoomDetailsActivity extends AppCompatActivity {
                             JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
                             JSONObject userobject = jsonObject1.getJSONObject("user_details");
 
-                            RoomDetailsActivity.this.showRoomJoinedUserList.add(new ShowRoomJoinedUser(jsonObject1.getString("id"), jsonObject1.getString("room_id"), jsonObject1.getString("user_id"), jsonObject1.getString("date"), new UserDetailsModel(userobject.getString("id"), userobject.getString("user_id"), userobject.getString("user_name"), userobject.getString("name"), userobject.getString("gender_type"), userobject.getString("dateofbirth"), userobject.getString("country"), userobject.getString("tag"), userobject.getString("bio"), userobject.getString("mobile"), userobject.getString("otp"), userobject.getString("otp_status"), userobject.getString(NotificationCompat.CATEGORY_STATUS), userobject.getString("password"), userobject.getString("photo"), userobject.getString("date"))));
+                            RoomDetailsActivity.this.showRoomJoinedUserList.add(
+                                    new ShowRoomJoinedUser(jsonObject1.getString("id"),
+                                            jsonObject1.getString("room_id"),
+                                            jsonObject1.getString("user_id"),
+                                            jsonObject1.getString("date"),
+                                            new UserDetailsModel(userobject.getString("id"),
+                                                    userobject.getString("user_id"),
+                                                    userobject.getString("user_name"), userobject.getString("name"), userobject.getString("gender_type"), userobject.getString("dateofbirth"), userobject.getString("country"), userobject.getString("tag"), userobject.getString("bio"), userobject.getString("mobile"), userobject.getString("otp"), userobject.getString("otp_status"), userobject.getString(NotificationCompat.CATEGORY_STATUS), userobject.getString("password"), userobject.getString("photo"), userobject.getString("date"))));
 
                         }
                         RoomDetailsActivity.this.joinseduser.setLayoutManager(new LinearLayoutManager(RoomDetailsActivity.this, RecyclerView.HORIZONTAL, false));
@@ -487,6 +569,17 @@ public class RoomDetailsActivity extends AppCompatActivity {
                             RoomDetailsActivity.totaljoin_memebr = jsonObject1.getString("totaljoin_memebr");
                             RoomDetailsActivity.country = jsonObject1.getString("country");
                             RoomDetailsActivity.this.head_roomname.setText(RoomDetailsActivity.room_name);
+
+                            if (created_id.equalsIgnoreCase(new PrefrenceManager(RoomDetailsActivity.this).getuserdetails().getId())){
+                                Log.i("asdasdasd if",created_id+" "+new PrefrenceManager(RoomDetailsActivity.this).getuserdetails().getId());
+                                setting_headr.setVisibility(View.VISIBLE);
+
+                            }else {
+                                setting_headr.setVisibility(View.GONE);
+                                Log.i("asdasdasd else",created_id+" "+new PrefrenceManager(RoomDetailsActivity.this).getuserdetails().getId());
+                            }
+
+
                             return;
                         }
                         Toast.makeText(RoomDetailsActivity.this, jsonObject.getString(NotificationCompat.CATEGORY_MESSAGE), Toast.LENGTH_SHORT).show();
@@ -533,7 +626,7 @@ public class RoomDetailsActivity extends AppCompatActivity {
     }
 
     public void exitroom() {
-        Constant.showprogressbar(this, 1);
+     ////   Constant.showprogressbar(this, 1);
         Constant.StartConnection().RoomExit(Constant.KEYVALUE, new PrefrenceManager(getApplicationContext()).getuserdetails().getId(), getIntent().getStringExtra("roomid")).enqueue(new Callback<JsonArray>() {
             /* class digi.coders.mho.Activity.RoomDetailsActivity.AnonymousClass14 */
 
@@ -550,5 +643,93 @@ public class RoomDetailsActivity extends AppCompatActivity {
                 Constant.dismissdialog();
             }
         });
+    }
+
+    public void getgifts(){
+        giftModelList=new ArrayList<>();
+        Constant.StartConnection().Gift(Constant.KEYVALUE).enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                Log.i("getgifts",response.body().toString());
+
+                try {
+                    JSONObject jsonObject=new JSONArray(response.body().toString()).getJSONObject(0);
+                    if (jsonObject.getString("res").equalsIgnoreCase("success")){
+
+
+                        JSONArray dataarray=jsonObject.getJSONArray("data");
+
+                        for (int i=0;i<dataarray.length();i++){
+                            JSONObject jsonObject1=dataarray.getJSONObject(i);
+                            giftModelList.add(new GiftModel(
+                                    jsonObject1.getString("id"),
+                                    jsonObject1.getString("gift_coins"),
+                                    jsonObject1.getString("icon"),
+                                    jsonObject1.getString("status"),
+                                    jsonObject1.getString("date")
+                            ));
+                        }
+
+                    }else {
+                        Toast.makeText(RoomDetailsActivity.this, ""+jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonArray> call, Throwable t) {
+                Log.i("getgifts",t.toString());
+            }
+        });
+
+    }
+
+
+    public void getwalletamount(){
+     ////   Constant.showprogressbar(this, 1);
+        Constant.StartConnection().GetWallet(Constant.KEYVALUE, new PrefrenceManager(RoomDetailsActivity.this).getuserdetails().getId()).enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                Constant.dismissdialog();
+                Log.i("getwalletamount_res",response.body().toString());
+
+
+                try {
+                    JSONArray jsonArray=new JSONArray(response.body().toString());
+                    JSONObject jsonObject=jsonArray.getJSONObject(0);
+                    if (jsonObject.getString("res").equalsIgnoreCase("success")){
+
+                         walletmount=jsonObject.getString("wallet");
+
+
+
+                    }else {
+                        Toast.makeText(RoomDetailsActivity.this, ""+jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonArray> call, Throwable t) {
+                Constant.dismissdialog();
+                Log.i("getwalletamount_error",t.toString());
+            }
+        });
+
+    }
+
+
+    @Override
+    public void onAdaoterClick() {
+
     }
 }

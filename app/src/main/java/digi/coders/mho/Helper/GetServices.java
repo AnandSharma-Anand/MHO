@@ -130,6 +130,11 @@ public interface GetServices {
     @POST("ShowRoom")
     Call<JsonArray> roomdetails(@Field("apikey") String str, @Field("room_id") String str2);
 
+
+    @FormUrlEncoded
+    @POST("Gift")
+    Call<JsonArray> Gift(@Field("apikey") String str2);
+
     @FormUrlEncoded
     @POST("SerachRoom")
     Call<JsonArray> SerachRoom(@Field("apikey") String str, @Field("search_value") String str2);

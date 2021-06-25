@@ -225,6 +225,20 @@ public class RoomDetailsActivity extends AppCompatActivity implements AdapterOnc
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String amount=Integer.parseInt(userlist.get(spin_count.getSelectedItemPosition()))*Integer.parseInt(giftModelList.get(GiftShowAdapter.selectedpos).getGift_coins())+"";
+                Log.i("salshfjlksdjgsd",amount);
+
+//                if ()
+
+                String  SendGift, room_id,sender_id,gift_id,gifted_id, quinty;
+
+                sender_id=new PrefrenceManager(RoomDetailsActivity.this).getuserdetails().getUser_id();
+                gift_id=giftModelList.get(GiftShowAdapter.selectedpos).getId();
+                gifted_id=showRoomJoinedUserList.get(spinner.getSelectedItemPosition()).getId();
+                quinty=userlist.get(spin_count.getSelectedItemPosition());
+
+
                Dialog dialog = new Dialog(RoomDetailsActivity.this,R.style.AppCompatAlertDialogStyle);
                 View aa = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE))
                             .inflate(R.layout.item_showsendedgift_layout, (ViewGroup) null, false);
@@ -732,4 +746,7 @@ public class RoomDetailsActivity extends AppCompatActivity implements AdapterOnc
     public void onAdaoterClick() {
 
     }
+
+
+
 }
